@@ -1,0 +1,3 @@
+[submodule "app/templates/silex"]
+	path = app/templates/silex
+	url = https://github.com/lyrixx/Silex-Kitchen-Edition.git
