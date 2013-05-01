@@ -1,22 +1,23 @@
 {
-  "name": "generator-angular",
-  "version": "0.2.2",
-  "description": "Yeoman generator for AngularJS",
+  "name": "generator-angular-silex",
+  "version": "0.1.1",
+  "description": "Yeoman generator for Silex based upon AngularJS",
   "keywords": [
     "yeoman-generator",
     "scaffold",
     "framework",
     "component",
     "front-end",
-    "app"
+    "app",
+    "silex"
   ],
-  "homepage": "https://github.com/yeoman/generator-angular",
-  "bugs": "https://github.com/yeoman/generator-angular/issues",
-  "author": "Chrome Developer Relations",
+  "homepage": "https://github.com/adamquadmon/generator-angular-silex",
+  "bugs": "https://github.com/adamquadmon/generator-angular-silex/issues",
+  "author": "Luciano Amodio",
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/yeoman/generator-angular.git"
+    "url": "git://github.com/adamquadmon/generator-angular-silex.git"
   },
   "scripts": {
     "test": "mocha"

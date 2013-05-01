@@ -155,7 +155,7 @@ Generator.prototype.bootstrapFiles = function bootstrapFiles() {
 };
 
 Generator.prototype.createIndexHtml = function createIndexHtml() {
-  this.template('../../templates/common/index.html', path.join(this.appPath, 'index.html'));
+  this.template('../../templates/common/index.html', 'resources/views/layout.html.twig');
 };
 
 Generator.prototype.packageFiles = function () {
