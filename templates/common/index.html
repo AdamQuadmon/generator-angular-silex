@@ -3,47 +3,105 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8">
+<head>
+    <title>{{ 'Homepage'|trans }}</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title></title>
     <meta name="description" content="">
+    <meta name="author" content="">
+
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/main.css --><% if (bootstrap && !compassBootstrap) { %>
-    <link rel="stylesheet" href="styles/bootstrap.css"><% } %>
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <% } %>
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-  </head>
-  <body ng-app="<%= _.camelize(appname) %>App">
-    <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-    <![endif]-->
+</head>
+<body ng-app="<%= _.camelize(appname) %>App">
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser
+    today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better
+    experience this site.</p>
+<![endif]-->
 
-    <!--[if lt IE 9]>
-      <script src="components/es5-shim/es5-shim.js"></script>
-      <script src="components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+<!--[if lt IE 9]>
+<script src="components/es5-shim/es5-shim.js"></script>
+<script src="components/json3/lib/json3.min.js"></script>
+<![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="container" ng-view></div>
+{% set active = active|default(null) %}
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand" href="{{ path('homepage') }}">{{ 'Silex Kitchen Sink Edition'|trans }}</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li {% if 'homepage' == active %}class="active"{% endif %}><a href="{{ path('homepage') }}">{{ 'Homepage'|trans }}</a></li>
+                    <li {% if 'page_with_cache' == active %}class="active"{% endif %}><a href="{{ path('page_with_cache') }}">Cache sample</a></li>
+                    <li {% if 'form' == active %}class="active"{% endif %}><a href="{{ path('form') }}">Form sample</a></li>
+                    <li {% if 'doctrine' == active %}class="active"{% endif %}><a href="{{ path('doctrine') }}">Doctrine</a></li>
+                    <li class="dropdown{% if 'account' == active %} active{% endif %}">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Account <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if is_granted('ROLE_USER') %}
+                            <li><a href="{{ path('logout') }}">{{ 'Logout'|trans }}</a></li>
+                            {% else %}
+                            <li><a href="{{ path('login') }}">{{ 'Login'|trans }}</a></li>
+                            <li><a href="#">{{ 'Register'|trans }}</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+<!-- Add your site or application content here -->
+<div class="container" ng-view>
+    <div id="main" role="main" class="container">
+        {% set alertTypeAvaillable = [ 'info', 'success', 'warning', 'error'] %}
+        {% for alert in alertTypeAvaillable %}
+        {% for message in app.session.getFlashBag.get(alert) %}
+        <div class="alert alert-{{ alert }}" >
+            <button class="close" data-dismiss="alert">×</button>
+            {{ message|trans }}
+        </div>
+        {% endfor %}
+        {% endfor %}
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
 
-    <script src="components/angular/angular.js"></script><% if (resourceModule) { %>
-    <script src="components/angular-resource/angular-resource.js"></script><% } %><% if (cookiesModule) { %>
-    <script src="components/angular-cookies/angular-cookies.js"></script><% } %><% if (sanitizeModule) { %>
-    <script src="components/angular-sanitize/angular-sanitize.js"></script><% } %>
 
-    <!-- build:js scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/controllers/main.js"></script>
-    <!-- endbuild -->
+<script src="components/angular/angular.js"></script>
+<% if (resourceModule) { %>
+<script src="components/angular-resource/angular-resource.js"></script>
+<% } %><% if (cookiesModule) { %>
+<script src="components/angular-cookies/angular-cookies.js"></script>
+<% } %><% if (sanitizeModule) { %>
+<script src="components/angular-sanitize/angular-sanitize.js"></script>
+<% } %>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-      s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
-  </body>
+<!-- build:js scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/main.js"></script>
+<!-- endbuild -->
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+    var _gaq = [
+        ['_setAccount', 'UA-XXXXX-X'],
+        ['_trackPageview']
+    ];
+    (function (d, t) {
+        var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+        g.src = ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g, s)
+    }(document, 'script'));
+</script>
+</body>
 </html>

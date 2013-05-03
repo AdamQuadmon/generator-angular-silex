@@ -40,15 +40,15 @@ var Generator = module.exports = function Generator(args, options) {
     args.push('--minsafe');
   }
 
-  this.hookFor('angular:common', {
+  this.hookFor('angular-silex:common', {
     args: args
   });
 
-  this.hookFor('angular:main', {
+  this.hookFor('angular-silex:main', {
     args: args
   });
 
-  this.hookFor('angular:controller', {
+  this.hookFor('angular-silex:controller', {
     args: args
   });
 
@@ -150,16 +150,50 @@ Generator.prototype.bootstrapFiles = function bootstrapFiles() {
   }
 
   if (this.bootstrap || this.compassBootstrap) {
-    // this.directory('images', 'app/images');
+     //this.directory('images', 'app/images');
   }
 };
 
+/*
 Generator.prototype.createIndexHtml = function createIndexHtml() {
   this.template('../../templates/common/index.html', 'resources/views/layout.html.twig');
 };
+*/
+
+Generator.prototype.silexFiles = function () {
+  this.mkdir('resources');
+  this.directory('silex/resources/cache', 'resources/cache');
+  this.directory('silex/resources/config', 'resources/config');
+  this.directory('silex/resources/locales', 'resources/locales');
+  this.directory('silex/resources/log', 'resources/log');
+  this.directory('silex/resources/views', 'resources/views');
+  this.template('../../templates/common/index.html', 'resources/views/layout.html.twig');
+  this.template('../../templates/common/silex/prod.php', 'resources/config/prod.php');
+
+  this.directory('silex/src', 'src');
+  this.template('../../templates/common/silex/app.php', 'src/app.php');
+  this.template('../../templates/common/silex/console.php', 'src/console.php');
+  this.template('../../templates/common/silex/Script.php', 'src/SKE/Composer/Script.php');
+  this.template('../../templates/common/silex/phpunit.xml', 'phpunit.xml');
+
+  this.template('silex/.travis.yml', '.travis.yml');
+  this.template('silex/composer.json', 'composer.json');
+  this.template('silex/composer.lock', 'composer.lock');
+  this.template('silex/console', 'console');
+  this.directory('silex/tests', 'test');
+
+  this.directory('silex/web', 'web');
+};
+
+/*
+is possible to force file copy with this.template() or this.directory() methods in app/index.js to force overweite? or there is another approach?
+ */
 
 Generator.prototype.packageFiles = function () {
-  this.template('../../templates/common/bower.json', 'bower.json');
+
   this.template('../../templates/common/package.json', 'package.json');
+  this.template('../../templates/common/bower.json', 'bower.json');
+
   this.template('../../templates/common/Gruntfile.js', 'Gruntfile.js');
+  this.template('../../templates/common/README.md', 'README.md');
 };

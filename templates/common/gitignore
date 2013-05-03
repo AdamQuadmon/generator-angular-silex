@@ -3,3 +3,10 @@ dist
 .tmp
 .sass-cache
 app/components
+
+.idea
+
+resources/cache/*
+resources/log/*
+vendor/
+web/assets/*
