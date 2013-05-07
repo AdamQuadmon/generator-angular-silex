@@ -11,12 +11,15 @@ module.exports = function (grunt) {
   // configurable paths
   var yeomanConfig = {
     app: 'app',
-    dist: 'dist'
+    dist: 'web',
+    views: 'resources/views',
+    viewsDist: 'resources/views_dist'
   };
 
   try {
     yeomanConfig.app = require('./bower.json').appPath || yeomanConfig.app;
-  } catch (e) {}
+  } catch (e) {
+  }
 
   grunt.initConfig({
     yeoman: yeomanConfig,
@@ -35,7 +38,8 @@ module.exports = function (grunt) {
       },
       livereload: {
         files: [
-          '<%%= yeoman.app %>/{,*/}*.html',
+          // TODO: check how to watch for twig files in /resources/view
+          '<%%= yeoman.views %>/{,*/}*.html',
           '{.tmp,<%%= yeoman.app %>}/styles/{,*/}*.css',
           '{.tmp,<%%= yeoman.app %>}/scripts/{,*/}*.js',
           '<%%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
@@ -78,14 +82,17 @@ module.exports = function (grunt) {
     },
     clean: {
       dist: {
-        files: [{
-          dot: true,
-          src: [
-            '.tmp',
-            '<%%= yeoman.dist %>/*',
-            '!<%%= yeoman.dist %>/.git*'
-          ]
-        }]
+        files: [
+          {
+            dot: true,
+            src: [
+              '.tmp',
+              '<%%= yeoman.dist %>/*',
+              '<%%= yeoman.viewsDist %>/*',
+              '!<%%= yeoman.dist %>/.git*'
+            ]
+          }
+        ]
       },
       server: '.tmp'
     },
@@ -106,22 +113,26 @@ module.exports = function (grunt) {
     },
     coffee: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%%= yeoman.app %>/scripts',
+            src: '{,*/}*.coffee',
+            dest: '.tmp/scripts',
+            ext: '.js'
+          }
+        ]
       },
       test: {
-        files: [{
-          expand: true,
-          cwd: 'test/spec',
-          src: '{,*/}*.coffee',
-          dest: '.tmp/spec',
-          ext: '.js'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: 'test/spec',
+            src: '{,*/}*.coffee',
+            dest: '.tmp/spec',
+            ext: '.js'
+          }
+        ]
       }
     },
     compass: {
@@ -152,13 +163,14 @@ module.exports = function (grunt) {
       }
     },
     useminPrepare: {
-      html: '<%%= yeoman.app %>/index.html',
+      html: '<%%= yeoman.views %>/layout.html.twig',
       options: {
-        dest: '<%%= yeoman.dist %>'
+        dest: '<%%= yeoman.viewsDist %>/'
       }
     },
     usemin: {
-      html: ['<%%= yeoman.dist %>/{,*/}*.html'],
+      // TODO: check how to usemin twig files in /resources/view
+      //html: ['<%%= yeoman.viewsDist %>/{,*/}*.html.twig'],
       css: ['<%%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         dirs: ['<%%= yeoman.dist %>']
@@ -166,12 +178,14 @@ module.exports = function (grunt) {
     },
     imagemin: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg}',
-          dest: '<%%= yeoman.dist %>/images'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%%= yeoman.app %>/images',
+            src: '{,*/}*.{png,jpg,jpeg}',
+            dest: '<%%= yeoman.dist %>/images'
+          }
+        ]
       }
     },
     cssmin: {
@@ -188,36 +202,48 @@ module.exports = function (grunt) {
       dist: {
         options: {
           /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true*/
+           // https://github.com/yeoman/grunt-usemin/issues/44
+           //collapseWhitespace: true,
+           collapseBooleanAttributes: true,
+           removeAttributeQuotes: true,
+           removeRedundantAttributes: true,
+           useShortDoctype: true,
+           removeEmptyAttributes: true,
+           removeOptionalTags: true*/
         },
-        files: [{
-          expand: true,
-          cwd: '<%%= yeoman.app %>',
-          src: ['*.html', 'views/*.html'],
-          dest: '<%%= yeoman.dist %>'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%%= yeoman.app %>',
+            src: ['*.html', 'views/*.html'],
+            dest: '<%%= yeoman.dist %>'
+          }//,
+          //{
+            //expand: true,
+            //cwd: '<%%= yeoman.views %>',
+            // TODO: check what to do with twig files in /resources/view
+            //src: ['*.html.twig', '*/*.html.twig'],
+            //dest: '<%%= yeoman.viewsDist %>'
+          //}
+        ]
       }
     },
     cdnify: {
       dist: {
-        html: ['<%%= yeoman.dist %>/*.html']
+        // TODO: check if it works
+        html: ['<%%= yeoman.viewsDist %>/layout.html.twig']
       }
     },
     ngmin: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%%= yeoman.dist %>/scripts',
-          src: '*.js',
-          dest: '<%%= yeoman.dist %>/scripts'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: '<%%= yeoman.dist %>/scripts',
+            src: '*.js',
+            dest: '<%%= yeoman.dist %>/scripts'
+          }
+        ]
       }
     },
     uglify: {
@@ -243,19 +269,21 @@ module.exports = function (grunt) {
     },
     copy: {
       dist: {
-        files: [{
-          expand: true,
-          dot: true,
-          cwd: '<%%= yeoman.app %>',
-          dest: '<%%= yeoman.dist %>',
-          src: [
-            '*.{ico,txt}',
-            '.htaccess',
-            'components/**/*',
-            'images/{,*/}*.{gif,webp}',
-            'styles/fonts/*'
-          ]
-        }]
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: '<%%= yeoman.app %>',
+            dest: '<%%= yeoman.dist %>',
+            src: [
+              '*.{ico,txt,php}',
+              '.htaccess',
+              'components/**/*',
+              'images/{,*/}*.{gif,webp}',
+              'styles/fonts/*'
+            ]
+          }
+        ]
       }
     }
   });
@@ -295,7 +323,7 @@ module.exports = function (grunt) {
     'cdnify',
     'ngmin',
     'uglify',
-    'rev',
+    //'rev',
     'usemin'
   ]);
 

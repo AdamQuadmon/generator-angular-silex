@@ -12,7 +12,7 @@
 
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/main.css --><% if (bootstrap && !compassBootstrap) { %>
+    <!-- build:css /app /styles/main.css --><% if (bootstrap && !compassBootstrap) { %>
     <link rel="stylesheet" href="styles/bootstrap.css">
     <% } %>
     <link rel="stylesheet" href="styles/main.css">
@@ -86,7 +86,7 @@
 <script src="components/angular-sanitize/angular-sanitize.js"></script>
 <% } %>
 
-<!-- build:js scripts/scripts.js -->
+<!-- build:js /app /scripts/scripts.js -->
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/main.js"></script>
 <!-- endbuild -->

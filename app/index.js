@@ -150,7 +150,7 @@ Generator.prototype.bootstrapFiles = function bootstrapFiles() {
   }
 
   if (this.bootstrap || this.compassBootstrap) {
-     //this.directory('images', 'app/images');
+     this.directory('images', 'app/images');
   }
 };
 
@@ -162,10 +162,10 @@ Generator.prototype.createIndexHtml = function createIndexHtml() {
 
 Generator.prototype.silexFiles = function () {
   this.mkdir('resources');
-  this.directory('silex/resources/cache', 'resources/cache');
+  this.mkdir('resources/cache');
   this.directory('silex/resources/config', 'resources/config');
   this.directory('silex/resources/locales', 'resources/locales');
-  this.directory('silex/resources/log', 'resources/log');
+  this.mkdir('resources/log');
   this.directory('silex/resources/views', 'resources/views');
   this.template('../../templates/common/index.html', 'resources/views/layout.html.twig');
   this.template('../../templates/common/silex/prod.php', 'resources/config/prod.php');
@@ -174,15 +174,16 @@ Generator.prototype.silexFiles = function () {
   this.template('../../templates/common/silex/app.php', 'src/app.php');
   this.template('../../templates/common/silex/console.php', 'src/console.php');
   this.template('../../templates/common/silex/Script.php', 'src/SKE/Composer/Script.php');
-  this.template('../../templates/common/silex/phpunit.xml', 'phpunit.xml');
 
+  this.template('../../templates/common/silex/phpunit.xml', 'phpunit.xml');
   this.template('silex/.travis.yml', '.travis.yml');
   this.template('silex/composer.json', 'composer.json');
   this.template('silex/composer.lock', 'composer.lock');
   this.template('silex/console', 'console');
   this.directory('silex/tests', 'test');
 
-  this.directory('silex/web', 'web');
+  this.copy ('silex/web/index.php', './app/index.php');
+  this.copy ('silex/web/index_dev.php', './app/index_dev.php');
 };
 
 /*

@@ -34,6 +34,18 @@ Run `yo angular-silex:app`, optionally passing an app name:
 yo angular-silex:app [app-name]
 ```
 
+BUG: there is a conflict for resources/views/layout.html.twig and other files, overwrite and go on.
+
+* get Composer
+```
+curl -sS https://getcomposer.org/installer | php
+```
+
+or (on windows)
+```
+php -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
+```
+
 ## Generators
 
 Available generators:
