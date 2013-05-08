@@ -1,15 +1,22 @@
-# AngularJS generator [![Build Status](https://secure.travis-ci.org/yeoman/generator-angular.png?branch=master)](http://travis-ci.org/yeoman/generator-angular)
 
-Maintainer: [Brian Ford](https://github.com/btford)
+# Silex - Yeoman Generator
 
-Based on [angular-seed](https://github.com/angular/angular-seed/)
+Maintainer: [Luciano Amodio](https://github.com/adamquadmon)
+
+Based on [generator-angular](https://github.com/yeoman/generator-angular/)
+Based on [Silex-Kitchen-Edition](https://github.com/lyrixx/Silex-Kitchen-Edition/)
 
 
 ## Usage
 
-Install `generator-angular`:
+Install `generator-angular-silex`:
 ```
-npm install -g generator-angular
+npm install -g generator-angular-silex
+```
+
+* For Development
+```
+git clone https://github.com/AdamQuadmon/generator-angular-silex.git
 ```
 
 Make a new directory, and `cd` into it:
@@ -17,22 +24,39 @@ Make a new directory, and `cd` into it:
 mkdir my-new-project && cd $_
 ```
 
-Run `yo angular`, optionally passing an app name:
+* For Developers
 ```
-yo angular [app-name]
+npm install ./../generator-angular-silex
+```
+
+Run `yo angular-silex:app`, optionally passing an app name:
+```
+yo angular-silex:app [app-name]
+```
+
+BUG: there is a conflict for resources/views/layout.html.twig and other files, overwrite and go on.
+
+* get Composer
+```
+curl -sS https://getcomposer.org/installer | php
+```
+
+or (on windows)
+```
+php -r "eval('?>'.file_get_contents('https://getcomposer.org/installer'));"
 ```
 
 ## Generators
 
 Available generators:
 
-* [angular](#app) (aka [angular:app](#app))
-* [angular:controller](#controller)
-* [angular:directive](#directive)
-* [angular:filter](#filter)
-* [angular:route](#route)
-* [angular:service](#service)
-* [angular:view](#view)
+* [angular-silex](#app) (aka [angular-silex:app](#app))
+* [angular-silex:controller](#controller)
+* [angular-silex:directive](#directive)
+* [angular-silex:filter](#filter)
+* [angular-silex:route](#route)
+* [angular-silex:service](#service)
+* [angular-silex:view](#view)
 
 **Note: Generators are to be run from the root directory of your app.**
 
@@ -41,7 +65,7 @@ Sets up a new AngularJS app, generating all the boilerplate you need to get star
 
 Example:
 ```bash
-yo angular
+yo angular-silex
 ```
 
 ### Route
@@ -49,7 +73,7 @@ Generates a controller and view, and configures a route in `app/scripts/app.js` 
 
 Example:
 ```bash
-yo angular:route myroute
+yo angular-silex:route myroute
 ```
 
 Produces `app/scripts/controllers/myroute.js`:
@@ -69,7 +93,7 @@ Generates a controller in `app/scripts/controllers`.
 
 Example:
 ```bash
-yo angular:controller user
+yo angular-silex:controller user
 ```
 
 Produces `app/scripts/controllers/user.js`:
@@ -83,7 +107,7 @@ Generates a directive in `app/scripts/directives`.
 
 Example:
 ```bash
-yo angular:directive myDirective
+yo angular-silex:directive myDirective
 ```
 
 Produces `app/scripts/directives/myDirective.js`:
@@ -104,7 +128,7 @@ Generates a filter in `app/scripts/filters`.
 
 Example:
 ```bash
-yo angular:filter myFilter
+yo angular-silex:filter myFilter
 ```
 
 Produces `app/scripts/filters/myFilter.js`:
@@ -121,7 +145,7 @@ Generates an HTML view file in `app/views`.
 
 Example:
 ```bash
-yo angular:view user
+yo angular-silex:view user
 ```
 
 Produces `app/views/user.html`:
@@ -134,7 +158,7 @@ Generates an AngularJS service.
 
 Example:
 ```bash
-yo angular:service myService
+yo angular-silex:service myService
 ```
 
 Produces `app/scripts/services/myService.js`:
@@ -169,7 +193,7 @@ For generators that output scripts, the `--coffee` option will output CoffeeScri
 
 For example:
 ```bash
-yo angular:controller user --coffee
+yo angular-silex:controller user --coffee
 ```
 
 Produces `app/scripts/controller/user.coffee`:
@@ -185,7 +209,7 @@ By default, generators produce unannotated code. Without annotations, AngularJS'
 
 #### Example
 ```bash
-yo angular:controller user --minsafe
+yo angular-silex:controller user --minsafe
 ```
 
 Produces `app/controller/user.js`:

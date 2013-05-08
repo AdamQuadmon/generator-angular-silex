@@ -165,12 +165,12 @@ module.exports = function (grunt) {
     useminPrepare: {
       html: '<%%= yeoman.views %>/layout.html.twig',
       options: {
-        dest: '<%%= yeoman.viewsDist %>/'
+        dest: '<%%= yeoman.viewsDist %>'
       }
     },
     usemin: {
       // TODO: check how to usemin twig files in /resources/view
-      //html: ['<%%= yeoman.viewsDist %>/{,*/}*.html.twig'],
+      html: ['<%%= yeoman.viewsDist %>/layout.html.twig'],
       css: ['<%%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         dirs: ['<%%= yeoman.dist %>']
@@ -217,14 +217,36 @@ module.exports = function (grunt) {
             cwd: '<%%= yeoman.app %>',
             src: ['*.html', 'views/*.html'],
             dest: '<%%= yeoman.dist %>'
-          }//,
-          //{
-            //expand: true,
-            //cwd: '<%%= yeoman.views %>',
-            // TODO: check what to do with twig files in /resources/view
-            //src: ['*.html.twig', '*/*.html.twig'],
-            //dest: '<%%= yeoman.viewsDist %>'
-          //}
+          }
+        ]
+      }
+    },
+    copy: {
+      dist: {
+        files: [
+          {
+            expand: true,
+            dot: true,
+            cwd: '<%%= yeoman.app %>',
+            dest: '<%%= yeoman.dist %>',
+            src: [
+              '*.{ico,txt,php}',
+              '.htaccess',
+              'components/**/*',
+              'images/{,*/}*.{gif,webp}',
+              'styles/fonts/*'
+            ]
+          },
+          {
+            expand: true,
+            dot: true,
+            cwd: '<%%= yeoman.views %>',
+            dest: '<%%= yeoman.viewsDist %>/',
+            src: [
+              '**'
+            ]
+          }
+
         ]
       }
     },
@@ -266,25 +288,6 @@ module.exports = function (grunt) {
           ]
         }
       }
-    },
-    copy: {
-      dist: {
-        files: [
-          {
-            expand: true,
-            dot: true,
-            cwd: '<%%= yeoman.app %>',
-            dest: '<%%= yeoman.dist %>',
-            src: [
-              '*.{ico,txt,php}',
-              '.htaccess',
-              'components/**/*',
-              'images/{,*/}*.{gif,webp}',
-              'styles/fonts/*'
-            ]
-          }
-        ]
-      }
     }
   });
 
@@ -311,14 +314,14 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'jshint',
-    'test',
+    //'test',
     'coffee',
     'compass:dist',
     'useminPrepare',
+    'concat',
     'imagemin',
     'cssmin',
-    'htmlmin',
-    'concat',
+    //'htmlmin',
     'copy',
     'cdnify',
     'ngmin',
