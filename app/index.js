@@ -166,6 +166,7 @@ Generator.prototype.silexFiles = function () {
   this.directory('silex/resources/config', 'resources/config');
   this.directory('silex/resources/locales', 'resources/locales');
   this.mkdir('resources/log');
+  this.directory('silex/resources/db', 'resources/db');
   this.directory('silex/resources/views', 'resources/views');
   this.template('../../templates/common/index.html', 'resources/views/layout.html.twig');
   this.template('../../templates/common/silex/prod.php', 'resources/config/prod.php');

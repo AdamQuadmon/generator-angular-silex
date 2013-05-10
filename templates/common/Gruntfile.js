@@ -155,10 +155,11 @@ module.exports = function (grunt) {
     concat: {
       dist: {
         files: {
-          '<%%= yeoman.dist %>/scripts/scripts.js': [
-            '.tmp/scripts/{,*/}*.js',
-            '<%%= yeoman.app %>/scripts/{,*/}*.js'
-          ]
+          // see resources/views/layout.html.twig for build block config
+          //'<%%= yeoman.dist %>/scripts/scripts.js': [
+          //  '.tmp/scripts/{,*/}*.js',
+          //  '<%%= yeoman.app %>/scripts/{,*/}*.js'
+          //]
         }
       }
     },
@@ -169,11 +170,10 @@ module.exports = function (grunt) {
       }
     },
     usemin: {
-      // TODO: check how to usemin twig files in /resources/view
       html: ['<%%= yeoman.viewsDist %>/layout.html.twig'],
-      css: ['<%%= yeoman.dist %>/styles/{,*/}*.css'],
+      //css: ['<%%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        dirs: ['<%%= yeoman.dist %>']
+        //dirs: ['<%%= yeoman.dist %>']
       }
     },
     imagemin: {
@@ -191,10 +191,11 @@ module.exports = function (grunt) {
     cssmin: {
       dist: {
         files: {
-          '<%%= yeoman.dist %>/styles/main.css': [
-            '.tmp/styles/{,*/}*.css',
-            '<%%= yeoman.app %>/styles/{,*/}*.css'
-          ]
+          // see resources/views/layout.html.twig for build block config
+          //'<%%= yeoman.dist %>/styles/main.css': [
+          //  '.tmp/styles/{,*/}*.css',
+          //  '<%%= yeoman.app %>/styles/{,*/}*.css'
+          //]
         }
       }
     },
@@ -230,7 +231,7 @@ module.exports = function (grunt) {
             cwd: '<%%= yeoman.app %>',
             dest: '<%%= yeoman.dist %>',
             src: [
-              '*.{ico,txt,php}',
+              '*.{ico,txt,php,xml}',
               '.htaccess',
               'components/**/*',
               'images/{,*/}*.{gif,webp}',
@@ -252,7 +253,6 @@ module.exports = function (grunt) {
     },
     cdnify: {
       dist: {
-        // TODO: check if it works
         html: ['<%%= yeoman.viewsDist %>/layout.html.twig']
       }
     },

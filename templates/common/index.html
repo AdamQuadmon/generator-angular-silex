@@ -12,10 +12,10 @@
 
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css /app /styles/main.css --><% if (bootstrap && !compassBootstrap) { %>
-    <link rel="stylesheet" href="styles/bootstrap.css">
+    <!-- build:css(.tmp) ../../web/styles/main.css --><% if (bootstrap && !compassBootstrap) { %>
+    <link rel="stylesheet" href="/styles/bootstrap.css">
     <% } %>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <!-- endbuild -->
 </head>
 <body ng-app="<%= _.camelize(appname) %>App">
@@ -26,8 +26,8 @@
 <![endif]-->
 
 <!--[if lt IE 9]>
-<script src="components/es5-shim/es5-shim.js"></script>
-<script src="components/json3/lib/json3.min.js"></script>
+<script src="/components/es5-shim/es5-shim.js"></script>
+<script src="/components/json3/lib/json3.min.js"></script>
 <![endif]-->
 
 {% set active = active|default(null) %}
@@ -77,18 +77,18 @@
 </div>
 
 
-<script src="components/angular/angular.js"></script>
+<script src="/components/angular/angular.js"></script>
 <% if (resourceModule) { %>
-<script src="components/angular-resource/angular-resource.js"></script>
+<script src="/components/angular-resource/angular-resource.js"></script>
 <% } %><% if (cookiesModule) { %>
-<script src="components/angular-cookies/angular-cookies.js"></script>
+<script src="/components/angular-cookies/angular-cookies.js"></script>
 <% } %><% if (sanitizeModule) { %>
-<script src="components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/components/angular-sanitize/angular-sanitize.js"></script>
 <% } %>
 
-<!-- build:js /app /scripts/scripts.js -->
-<script src="scripts/app.js"></script>
-<script src="scripts/controllers/main.js"></script>
+<!-- build:js(app) ../../web/scripts/scripts.js -->
+<script src="/scripts/app.js"></script>
+<script src="/scripts/controllers/main.js"></script>
 <!-- endbuild -->
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
