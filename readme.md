@@ -1,5 +1,22 @@
-
 # Silex - Yeoman Generator
+
+**DEPRECATED**
+
+Dubai, 26/02/2014.
+
+Hi Guys,
+
+I'm not working on this project since long time.
+The code is very old and a lot of things are changed in generator-angular (some also in silex-kitchen-edition).
+I don't suggest to use this generator.
+
+But there is another consideration about that.
+In the first place I was trying to mix up Silex and Angular in the same application (making silex serving the Angular application).
+I think the best way to do stuff is just to use a light Silex version for providing API and a real generator-angular application (or whtever) as client consumer.
+Two different project.
+
+Feel free to ask if you like to have more info about this.
+
 
 Maintainer: [Luciano Amodio](https://github.com/adamquadmon)
 
