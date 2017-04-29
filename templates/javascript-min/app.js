@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('<%= _.camelize(appname) %>App', [])
-  .config(['$routeProvider', function ($routeProvider) {
+  .config(['$routeProvider', $routeProvider => {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',

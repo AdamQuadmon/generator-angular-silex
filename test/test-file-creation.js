@@ -8,10 +8,10 @@ var generators = require('yeoman-generator');
 var helpers = require('yeoman-generator').test;
 
 
-describe('Angular generator', function () {
+describe('Angular generator', () => {
   var angular;
 
-  beforeEach(function (done) {
+  beforeEach(done => {
     var deps = [
       '../../app',
       '../../common',
@@ -21,7 +21,7 @@ describe('Angular generator', function () {
         'karma:app'
       ]
     ];
-    helpers.testDirectory(path.join(__dirname, 'temp'), function (err) {
+    helpers.testDirectory(path.join(__dirname, 'temp'), err => {
       if (err) {
         done(err);
       }
@@ -31,16 +31,16 @@ describe('Angular generator', function () {
     });
   });
 
-  it('should generate dotfiles', function (done) {
+  it('should generate dotfiles', done => {
     helpers.mockPrompt(angular, {'bootstrap': 'Y', 'compassBoostrap': 'Y'});
 
-    angular.run({}, function () {
+    angular.run({}, () => {
       helpers.assertFiles(['.bowerrc', '.gitignore', '.editorconfig', '.jshintrc']);
       done();
     });
   });
 
-  it('creates expected files', function (done) {
+  it('creates expected files', done => {
     var expected = ['app/.htaccess',
                     'app/404.html',
                     'app/favicon.ico',
@@ -58,13 +58,13 @@ describe('Angular generator', function () {
                     ];
     helpers.mockPrompt(angular, {'bootstrap': 'Y', 'compassBoostrap': 'Y'});
 
-    angular.run({}, function() {
+    angular.run({}, () => {
       helpers.assertFiles(expected);
       done();
     });
   });
 
-  it('creates coffeescript files', function (done) {
+  it('creates coffeescript files', done => {
     var expected = ['app/.htaccess',
                     'app/404.html',
                     'app/favicon.ico',
@@ -83,21 +83,21 @@ describe('Angular generator', function () {
     helpers.mockPrompt(angular, {'bootstrap': 'Y', 'compassBoostrap': 'Y'});
 
     angular.env.options.coffee = true;
-    angular.run([], function () {
+    angular.run([], () => {
       helpers.assertFiles(expected);
       done();
     });
   });
 
-  describe('Controller', function () {
-    it('should generate a new controller', function (done) {
+  describe('Controller', () => {
+    it('should generate a new controller', done => {
       var angularCtrl;
       var deps = ['../../controller'];
       angularCtrl = helpers.createGenerator('angular:controller', deps, ['foo']);
 
       helpers.mockPrompt(angular, {'bootstrap': 'Y', 'compassBoostrap': 'Y'});
-      angular.run([], function () {
-        angularCtrl.run([], function () {
+      angular.run([], () => {
+        angularCtrl.run([], () => {
           helpers.assertFiles([
             ['app/scripts/controllers/foo.js', /controller\('FooCtrl'/],
             ['test/spec/controllers/foo.js', /describe\('Controller: FooCtrl'/]
@@ -108,15 +108,15 @@ describe('Angular generator', function () {
     });
   });
 
-  describe('View', function () {
-    it('should generate a new view', function (done) {
+  describe('View', () => {
+    it('should generate a new view', done => {
       var angularView;
       var deps = ['../../view'];
       angularView = helpers.createGenerator('angular:view', deps, ['foo']);
 
       helpers.mockPrompt(angular, {'bootstrap': 'Y', 'compassBoostrap': 'Y'});
-      angular.run([], function (){
-        angularView.run([], function () {
+      angular.run([], () => {
+        angularView.run([], () => {
           helpers.assertFiles([
             ['app/views/foo.html']
           ]);

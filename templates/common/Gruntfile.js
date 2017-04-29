@@ -1,10 +1,8 @@
 'use strict';
 var lrSnippet = require('grunt-contrib-livereload/lib/utils').livereloadSnippet;
-var mountFolder = function (connect, dir) {
-  return connect.static(require('path').resolve(dir));
-};
+var mountFolder = (connect, dir) => connect.static(require('path').resolve(dir));
 
-module.exports = function (grunt) {
+module.exports = grunt => {
   // load all grunt tasks
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
@@ -55,7 +53,7 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          middleware: function (connect) {
+          middleware(connect) {
             return [
               lrSnippet,
               mountFolder(connect, '.tmp'),
@@ -66,7 +64,7 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-          middleware: function (connect) {
+          middleware(connect) {
             return [
               mountFolder(connect, '.tmp'),
               mountFolder(connect, 'test')

@@ -2,7 +2,7 @@
 var markdown = require('marked');
 var semver = require('semver');
 
-module.exports = function (grunt) {
+module.exports = grunt => {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     changelog: {
@@ -35,9 +35,9 @@ module.exports = function (grunt) {
       var pkg = grunt.file.readJSON(file);
       var newVersion = pkg.version = semver.inc(pkg.version, type || 'patch');
       return {
-        file: file,
-        pkg: pkg,
-        newVersion: newVersion
+        file,
+        pkg,
+        newVersion
       };
     }
 

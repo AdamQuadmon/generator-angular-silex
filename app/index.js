@@ -41,15 +41,15 @@ var Generator = module.exports = function Generator(args, options) {
   }
 
   this.hookFor('angular-silex:common', {
-    args: args
+    args
   });
 
   this.hookFor('angular-silex:main', {
-    args: args
+    args
   });
 
   this.hookFor('angular-silex:controller', {
-    args: args
+    args
   });
 
   this.hookFor('karma', {
@@ -84,7 +84,7 @@ Generator.prototype.askFor = function askFor() {
     warning: 'Yes: All Twitter Bootstrap files will be placed into the styles directory.'
   }];
 
-  this.prompt(prompts, function (err, props) {
+  this.prompt(prompts, (err, props) => {
     if (err) {
       return this.emit('error', err);
     }
@@ -93,7 +93,7 @@ Generator.prototype.askFor = function askFor() {
     this.compassBootstrap = (/y/i).test(props.compassBootstrap);
 
     cb();
-  }.bind(this));
+  });
 };
 
 Generator.prototype.askForModules = function askForModules() {
@@ -116,7 +116,7 @@ Generator.prototype.askForModules = function askForModules() {
     warning: 'Yes: angular-sanitize added to bower.json'
   }];
 
-  this.prompt(prompts, function (err, props) {
+  this.prompt(prompts, (err, props) => {
     if (err) {
       return this.emit('error', err);
     }
@@ -126,7 +126,7 @@ Generator.prototype.askForModules = function askForModules() {
     this.sanitizeModule = (/y/i).test(props.sanitizeModule);
 
     cb();
-  }.bind(this));
+  });
 };
 
 // Duplicated from the SASS generator, waiting a solution for #138
@@ -137,7 +137,7 @@ Generator.prototype.bootstrapFiles = function bootstrapFiles() {
     var cb = this.async();
 
     this.write(path.join(appPath, 'styles/main.scss'), '@import "compass_twitter_bootstrap";');
-    this.remote('vwall', 'compass-twitter-bootstrap', 'v2.2.2.2', function (err, remote) {
+    this.remote('vwall', 'compass-twitter-bootstrap', 'v2.2.2.2', (err, remote) => {
       if (err) {
         return cb(err);
       }

@@ -7,8 +7,8 @@ var angularUtils = require('../util.js');
 
 module.exports = Generator;
 
-function Generator() {
-  ScriptBase.apply(this, arguments);
+function Generator(...args) {
+  ScriptBase.apply(this, args);
 }
 
 util.inherits(Generator, ScriptBase);
