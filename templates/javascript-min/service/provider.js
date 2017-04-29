@@ -8,18 +8,14 @@ angular.module('<%= _.camelize(appname) %>App')
 
     // Private constructor
     function Greeter() {
-      this.greet = function() {
-        return salutation;
-      };
+      this.greet = () => salutation;
     }
 
     // Public API for configuration
-    this.setSalutation = function(s) {
+    this.setSalutation = s => {
       salutation = s;
     };
 
     // Method for instantiating
-    this.$get = function() {
-      return new Greeter();
-    };
+    this.$get = () => new Greeter();
   }]);

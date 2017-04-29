@@ -4,8 +4,8 @@ var fs = require('fs');
 
 
 module.exports = {
-  rewrite: rewrite,
-  rewriteFile: rewriteFile
+  rewrite,
+  rewriteFile
 };
 
 function rewriteFile (args) {
@@ -24,9 +24,7 @@ function escapeRegExp (str) {
 
 function rewrite (args) {
   // check if splicable is already in the body text
-  var re = new RegExp(args.splicable.map(function (line) {
-    return '\s*' + escapeRegExp(line);
-  }).join('\n'));
+  var re = new RegExp(args.splicable.map(line => '\s*' + escapeRegExp(line)).join('\n'));
 
   if (re.test(args.haystack)) {
     return args.haystack;
@@ -35,7 +33,7 @@ function rewrite (args) {
   var lines = args.haystack.split('\n');
 
   var otherwiseLineIndex = 0;
-  lines.forEach(function (line, i) {
+  lines.forEach((line, i) => {
     if (line.indexOf(args.needle) !== -1) {
       otherwiseLineIndex = i;
     }
@@ -51,9 +49,7 @@ function rewrite (args) {
     spaceStr += ' ';
   }
 
-  lines.splice(otherwiseLineIndex, 0, args.splicable.map(function (line) {
-    return spaceStr + line;
-  }).join('\n'));
+  lines.splice(otherwiseLineIndex, 0, args.splicable.map(line => spaceStr + line).join('\n'));
 
   return lines.join('\n');
 }

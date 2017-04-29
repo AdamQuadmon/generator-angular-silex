@@ -6,8 +6,8 @@ var angularUtils = require('./util.js');
 
 module.exports = Generator;
 
-function Generator() {
-  yeoman.generators.NamedBase.apply(this, arguments);
+function Generator(...args) {
+  yeoman.generators.NamedBase.apply(this, args);
 
   try {
     this.appname = require(path.join(process.cwd(), 'bower.json')).name;

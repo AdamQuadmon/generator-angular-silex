@@ -6,8 +6,8 @@ var ScriptBase = require('../script-base.js');
 
 module.exports = Generator;
 
-function Generator() {
-  ScriptBase.apply(this, arguments);
+function Generator(...args) {
+  ScriptBase.apply(this, args);
 
   // if the controller name is suffixed with ctrl, remove the suffix
   // if the controller name is just "ctrl," don't append/remove "ctrl"

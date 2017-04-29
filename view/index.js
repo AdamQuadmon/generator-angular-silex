@@ -6,8 +6,8 @@ var yeoman = require('yeoman-generator');
 
 module.exports = Generator;
 
-function Generator() {
-  yeoman.generators.NamedBase.apply(this, arguments);
+function Generator(...args) {
+  yeoman.generators.NamedBase.apply(this, args);
   this.sourceRoot(path.join(__dirname, '../templates'));
 
   if (typeof this.env.options.appPath === 'undefined') {

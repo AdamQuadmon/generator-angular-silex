@@ -8,12 +8,12 @@ var generators = require('yeoman-generator');
 var helpers = require('yeoman-generator').test;
 
 
-describe('Angular generator template mechanism', function () {
+describe('Angular generator template mechanism', () => {
     //TODO: Add underscore dependency and test with _.camelize(folderName);
     var folderName = 'UpperCaseBug';
     var angular;
 
-    beforeEach(function (done) {
+    beforeEach(done => {
         var deps = [
             '../../app',
             '../../common',
@@ -23,7 +23,7 @@ describe('Angular generator template mechanism', function () {
                 'karma:app'
             ]
         ];
-        helpers.testDirectory(path.join(__dirname, folderName), function (err) {
+        helpers.testDirectory(path.join(__dirname, folderName), err => {
             if (err) {
                 done(err);
             }
@@ -33,7 +33,7 @@ describe('Angular generator template mechanism', function () {
         });
     });
 
-    it('should generate the same appName in every file', function (done) {
+    it('should generate the same appName in every file', done => {
         var expectedAppName = folderName + 'App';
         var expected = [
             'app/scripts/app.js',
@@ -43,7 +43,7 @@ describe('Angular generator template mechanism', function () {
         ];
         helpers.mockPrompt(angular, {'bootstrap': 'Y', 'compassBoostrap': 'Y'});
 
-        angular.run({}, function () {
+        angular.run({}, () => {
             // Check if all files are created for the test
             helpers.assertFiles(expected);
 
